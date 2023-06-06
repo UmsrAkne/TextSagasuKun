@@ -4,16 +4,38 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:TextSagasuKun.Model"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:viewModels="clr-namespace:TextSagasuKun.ViewModels"
     Title="{Binding Title}"
-    Width="525"
-    Height="350"
+    Width="1280"
+    Height="300"
     d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <ListView Grid.Column="0" ItemsSource="{Binding SearchResults}">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type model:SearchResult}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox MinWidth="100" Text="{Binding Pattern}" />
+                        <TextBlock Width="400" Text="{Binding FirstResult}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView Grid.Column="1" ItemsSource="{Binding TextStore.Texts}" />
+
+        <ContentControl
+            Grid.Row="0"
+            Grid.Column="0"
+            prism:RegionManager.RegionName="ContentRegion" />
     </Grid>
 </Window>
