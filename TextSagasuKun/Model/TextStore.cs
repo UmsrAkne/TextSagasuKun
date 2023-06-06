@@ -9,12 +9,9 @@ namespace TextSagasuKun.Model
     {
         public List<string> Texts { get; set; } = new List<string>();
 
-        public SearchResult Search(string pattern)
+        public List<string> Search(string pattern)
         {
-            return new SearchResult()
-            {
-                Results = Texts.Where(text => Regex.IsMatch(text, pattern)).ToList(),
-            };
+            return Texts.Where(text => Regex.IsMatch(text, pattern)).ToList();
         }
     }
 }

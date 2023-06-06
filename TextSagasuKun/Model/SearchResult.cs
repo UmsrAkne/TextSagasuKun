@@ -19,10 +19,13 @@ namespace TextSagasuKun.Model
                 if (SetProperty(ref results, value))
                 {
                     RaisePropertyChanged(nameof(FirstResult));
+                    RaisePropertyChanged(nameof(MultiMatching));
                 }
             }
         }
 
         public string FirstResult => Results.FirstOrDefault() != null ? Results.First() : string.Empty;
+
+        public bool MultiMatching => Results.Count > 1;
     }
 }

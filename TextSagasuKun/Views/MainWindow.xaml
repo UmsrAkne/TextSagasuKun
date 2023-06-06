@@ -20,12 +20,62 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <ListView Grid.Column="0" ItemsSource="{Binding SearchResults}">
+        <ListView
+            x:Name="ResultListView"
+            Grid.Column="0"
+            ItemsSource="{Binding SearchResults}"
+            SelectedIndex="{Binding SelectedIndex}">
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="true">
+                            <Setter Property="IsSelected" Value="true" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type model:SearchResult}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBox MinWidth="100" Text="{Binding Pattern}" />
-                        <TextBlock Width="400" Text="{Binding FirstResult}" />
+
+                        <TextBox MinWidth="100" Text="{Binding Pattern, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox.InputBindings>
+                                <KeyBinding
+                                    Key="F"
+                                    Command="{Binding ElementName=ResultListView, Path=DataContext.SearchCommand}"
+                                    CommandParameter="{Binding}"
+                                    Modifiers="Control" />
+
+                                <KeyBinding
+                                    Key="Enter"
+                                    Command="{Binding ElementName=ResultListView, Path=DataContext.AddResultLineCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    Modifiers="Control" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+
+                        <Border Margin="5,0" />
+
+                        <TextBlock Width="380" Text="{Binding FirstResult}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding MultiMatching}" Value="True">
+                                            <Setter Property="Background" Value="PaleVioletRed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <Border Margin="5,0" />
+
+                        <TextBlock Text="[ matching count : " />
+                        <TextBlock Text="{Binding Results.Count}" />
+                        <TextBlock Text=" ]" />
+
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
