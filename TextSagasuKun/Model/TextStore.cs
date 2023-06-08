@@ -7,7 +7,9 @@ namespace TextSagasuKun.Model
 {
     public class TextStore : BindableBase
     {
-        public List<string> Texts { get; set; } = new List<string>();
+        private List<string> texts = new List<string>();
+
+        public List<string> Texts { get => texts; set => SetProperty(ref texts, value); }
 
         public List<string> Search(string pattern)
         {

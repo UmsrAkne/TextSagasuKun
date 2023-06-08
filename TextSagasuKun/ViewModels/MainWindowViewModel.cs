@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -44,5 +47,10 @@ namespace TextSagasuKun.ViewModels
             listView.UpdateLayout();
             listView.ItemContainerGenerator.ContainerFromIndex(SelectedIndex + 1).FindDescendant<TextBox>().Focus();
         });
+
+        public void LoadBaseText(string text)
+        {
+            TextStore.Texts = Regex.Split(text, "\n|\r\n|\r").ToList();
+        }
     }
 }
