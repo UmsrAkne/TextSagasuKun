@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -47,7 +50,7 @@ namespace TextSagasuKun.ViewModels
 
         public void LoadBaseText(string text)
         {
-            throw new System.NotImplementedException();
+            TextStore.Texts = Regex.Split(text, "\n|\r\n|\r").ToList();
         }
     }
 }

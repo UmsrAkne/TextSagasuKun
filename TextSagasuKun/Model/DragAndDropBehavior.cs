@@ -34,7 +34,10 @@ namespace TextSagasuKun.Model
 
             if (files != null && Path.GetExtension(files.First()) == ".txt")
             {
-                vm?.LoadBaseText();
+                using (var sr = new StreamReader(files.First()))
+                {
+                    vm?.LoadBaseText(sr.ReadToEnd());
+                }
             }
         }
 
