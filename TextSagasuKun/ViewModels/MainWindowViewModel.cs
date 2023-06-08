@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -46,6 +47,11 @@ namespace TextSagasuKun.ViewModels
             SearchResults.Insert(SelectedIndex + 1, new SearchResult());
             listView.UpdateLayout();
             listView.ItemContainerGenerator.ContainerFromIndex(SelectedIndex + 1).FindDescendant<TextBox>().Focus();
+        });
+
+        public DelegateCommand CopyResultCommand => new DelegateCommand(() =>
+        {
+            Clipboard.SetDataObject(string.Join(Environment.NewLine, SearchResults.Select(r => r.FirstResult)));
         });
 
         public void LoadBaseText(string text)
