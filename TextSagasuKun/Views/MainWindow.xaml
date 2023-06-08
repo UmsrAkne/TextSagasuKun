@@ -26,8 +26,21 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Menu
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
+            <MenuItem Command="{Binding CopyResultCommand}" Header="Copy Result" />
+        </Menu>
+
         <ListView
             x:Name="ResultListView"
+            Grid.Row="1"
             Grid.Column="0"
             ItemsSource="{Binding SearchResults}"
             SelectedIndex="{Binding SelectedIndex}">
@@ -87,7 +100,10 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView Grid.Column="1" ItemsSource="{Binding TextStore.Texts}" />
+        <ListView
+            Grid.Row="1"
+            Grid.Column="1"
+            ItemsSource="{Binding TextStore.Texts}" />
 
         <ContentControl
             Grid.Row="0"
