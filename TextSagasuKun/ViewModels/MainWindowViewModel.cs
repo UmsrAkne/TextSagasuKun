@@ -44,5 +44,10 @@ namespace TextSagasuKun.ViewModels
             listView.UpdateLayout();
             listView.ItemContainerGenerator.ContainerFromIndex(SelectedIndex + 1).FindDescendant<TextBox>().Focus();
         });
+
+        public void LoadBaseText(string text)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
