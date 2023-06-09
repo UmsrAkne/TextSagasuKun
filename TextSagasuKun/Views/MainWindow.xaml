@@ -72,6 +72,19 @@
                                     Command="{Binding ElementName=ResultListView, Path=DataContext.AddResultLineCommand}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListView}}"
                                     Modifiers="Control" />
+
+                                <KeyBinding
+                                    Key="J"
+                                    Command="{Binding ElementName=ResultListView, Path=DataContext.CursorDownCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    Modifiers="Control" />
+
+                                <KeyBinding
+                                    Key="K"
+                                    Command="{Binding ElementName=ResultListView, Path=DataContext.CursorUpCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    Modifiers="Control" />
+
                             </TextBox.InputBindings>
                         </TextBox>
 
