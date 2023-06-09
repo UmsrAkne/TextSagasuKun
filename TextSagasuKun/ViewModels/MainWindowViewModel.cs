@@ -49,6 +49,26 @@ namespace TextSagasuKun.ViewModels
             listView.ItemContainerGenerator.ContainerFromIndex(SelectedIndex + 1).FindDescendant<TextBox>().Focus();
         });
 
+        public DelegateCommand<ListView> CursorDownCommand => new DelegateCommand<ListView>(lv =>
+        {
+            if (lv == null || lv.Items.Count - 1 <= lv.SelectedIndex)
+            {
+                return;
+            }
+
+            lv.ItemContainerGenerator.ContainerFromIndex(SelectedIndex + 1).FindDescendant<TextBox>().Focus();
+        });
+
+        public DelegateCommand<ListView> CursorUpCommand => new DelegateCommand<ListView>(lv =>
+        {
+            if (lv == null || lv.SelectedIndex <= 0)
+            {
+                return;
+            }
+
+            lv.ItemContainerGenerator.ContainerFromIndex(SelectedIndex - 1).FindDescendant<TextBox>().Focus();
+        });
+
         public DelegateCommand CopyResultCommand => new DelegateCommand(() =>
         {
             Clipboard.SetDataObject(string.Join(Environment.NewLine, SearchResults.Select(r => r.FirstResult)));
