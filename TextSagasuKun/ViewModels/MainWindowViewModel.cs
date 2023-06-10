@@ -45,6 +45,11 @@ namespace TextSagasuKun.ViewModels
             }
 
             SearchResults.Insert(SelectedIndex + 1, new SearchResult());
+            for (var i = 0; i < SearchResults.Count; i++)
+            {
+                SearchResults[i].Index = i + 1;
+            }
+
             listView.UpdateLayout();
             listView.ItemContainerGenerator.ContainerFromIndex(SelectedIndex + 1).FindDescendant<TextBox>().Focus();
         });

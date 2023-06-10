@@ -8,6 +8,7 @@ namespace TextSagasuKun.Model
     {
         private string pattern = string.Empty;
         private List<string> results = new List<string>();
+        private int index;
 
         public string Pattern { get => pattern; set => SetProperty(ref pattern, value); }
 
@@ -27,5 +28,7 @@ namespace TextSagasuKun.Model
         public string FirstResult => Results.FirstOrDefault() != null ? Results.First() : string.Empty;
 
         public bool MultiMatching => Results.Count > 1;
+
+        public int Index { get => index; set => SetProperty(ref index, value); }
     }
 }
